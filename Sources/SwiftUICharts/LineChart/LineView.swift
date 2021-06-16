@@ -30,6 +30,7 @@ public struct LineView: View {
                 title: String? = nil,
                 legend: String? = nil,
                 style: ChartStyle = Styles.lineChartStyleOne,
+                darkStyle: ChartStyle = Styles.lineViewDarkMode,
                 valueSpecifier: String? = "%.1f",
                 legendSpecifier: String? = "%.2f") {
         
@@ -39,7 +40,7 @@ public struct LineView: View {
         self.style = style
         self.valueSpecifier = valueSpecifier!
         self.legendSpecifier = legendSpecifier!
-        self.darkModeStyle = style.darkModeStyle != nil ? style.darkModeStyle! : Styles.lineViewDarkMode
+        self.darkModeStyle = darkStyle
     }
     
     public var body: some View {
@@ -65,7 +66,7 @@ public struct LineView: View {
                             Legend(data: self.data,
                                    frame: .constant(reader.frame(in: .local)), hideHorizontalLines: self.$hideHorizontalLines, specifier: legendSpecifier)
                                 .transition(.opacity)
-                                .animation(Animation.easeOut(duration: 1).delay(1))
+                                .animation(Animation.easeOut(duration: 1))
                         }
                         Line(data: self.data,
                              frame: .constant(CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - 30, height: reader.frame(in: .local).height + 25)),
