@@ -92,6 +92,7 @@ public struct LineView: View {
                         .offset(x: self.dragLocation.x - geometry.frame(in: .local).size.width/2, y: 36)
                 }
                 .frame(width: geometry.frame(in: .local).size.width, height: 240)
+#if os(iOS)
                 .gesture(DragGesture()
                 .onChanged({ value in
                     self.dragLocation = value.location
@@ -105,6 +106,7 @@ public struct LineView: View {
                         self.hideHorizontalLines = false
                     })
                 )
+#endif
             }
         }
     }
